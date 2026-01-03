@@ -5,13 +5,8 @@ require("dotenv").config();
 
 const app = express();
 
-// ✅ FIXED CORS: allow all origins (recommended for interview/demo apps)
-app.use(
-  cors({
-    origin: "*",
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
-  })
-);
+// ✅ SIMPLE CORS — REQUIRED for Vercel + Render
+app.use(cors());
 
 app.use(express.json());
 
@@ -24,7 +19,7 @@ mongoose
 // ✅ API routes
 app.use("/api", require("./routes/contactRoutes"));
 
-// ✅ Health check (optional but nice)
+// ✅ Health check
 app.get("/", (req, res) => {
   res.send("Contact Hub Backend is running 🚀");
 });
